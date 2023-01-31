@@ -24,8 +24,8 @@ export namespace CMS {
           /** @description List of Posts */
           200: {
             content: {
-              'application/json': components['schemas']['Post'][];
-              'application/xml': components['schemas']['Post'][];
+              'application/json': components['schemas']['PostPaginated'];
+              'application/xml': components['schemas']['PostPaginated'];
             };
           };
         };
@@ -67,8 +67,17 @@ export namespace CMS {
         /** @example ##Markup */
         body: string;
         images: components['schemas']['Image'][];
-        /** @example Sun Jan 29 2023 21:09:16 GMT-0400 (Amazon Standard Time) */
+        /** @example Mon Jan 30 2023 21:15:53 GMT-0400 (Amazon Standard Time) */
         createdAt: string;
+      };
+      PostPaginated: {
+        content: components['schemas']['Post'][];
+        /** @example 5 */
+        rows: number;
+        /** @example 0 */
+        page: number;
+        /** @example 10 */
+        totalRecords: number;
       };
       PostCreate: {
         /** @example título de um post */
@@ -103,9 +112,24 @@ export namespace CMS {
         /** @example 1 */
         id: string;
       };
+      PaginateQuery: {
+        rows: components['parameters']['rows'];
+        page: components['parameters']['page'];
+        order: components['parameters']['order'];
+      };
     };
     responses: never;
-    parameters: never;
+    parameters: {
+      /** @description rows to be returned in one page */
+      rows: number;
+      /** @description page index of pagination */
+      page: number;
+      /**
+       * @description order of pagination [ field,order ]
+       * @example title,asc
+       */
+      order: string;
+    };
     requestBodies: never;
     headers: never;
     pathItems: never;

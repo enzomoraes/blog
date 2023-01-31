@@ -6,10 +6,11 @@ import FeaturedPost from '../components/FeaturedPost';
 import PageGrid from '../components/PageGrid';
 import PostCard from '../components/PostCard';
 import PostsGrid from '../components/PostsGrid';
+import { Post } from '../core/models/@types/Post';
 import PostService from '../core/services/PostService';
 
 interface HomeProps {
-  posts?: any;
+  posts?: Post.PostPaginated;
 }
 
 export default function Home(props: HomeProps) {
@@ -22,18 +23,18 @@ export default function Home(props: HomeProps) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      {posts?.content && (
+      {posts?.content[0] && (
         <FeaturedPost postDetailed={posts.content[0]}></FeaturedPost>
       )}
       <PostsGrid>
-        {posts?.content?.slice(1).map((post: any) => {
+        {posts?.content?.slice(1).map((post: Post.PostDetailed) => {
           return <PostCard key={post.id} post={post} />;
         })}
       </PostsGrid>
 
       <ReactPaginate
         containerClassName={'Pagination'}
-        pageCount={posts?.totalPages || 0}
+        pageCount={posts?.totalRecords || 0}
         marginPagesDisplayed={0}
         pageRangeDisplayed={3}
         previousLabel={'<'}
@@ -65,11 +66,11 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async ({
     return sendToHomePage();
   }
 
-  const posts = await PostService.getAllPosts({ page: page - 1 });
-
-  if (!posts.content?.length) {
-    return sendToHomePage();
-  }
+  const posts = await PostService.paginate({
+    page: 0,
+    rows: 10,
+    order: 'createdAt,desc',
+  });
 
   return {
     props: { posts },
