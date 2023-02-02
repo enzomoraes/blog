@@ -12,7 +12,7 @@ export default function PostCard(props: PostCardProps) {
   const { post } = props;
   return (
     <Wrapper href={`/posts/${post.id}/${post.slug}`}>
-      <Thumbnail bg={post.images[0].small} />
+      <Thumbnail bg={'/laptop.jpeg'} />
       <Info>
         <Editor>
           <EditorImage

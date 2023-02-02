@@ -2,8 +2,11 @@
 
 TODO:
 
+adicionar botão de login
+imagens em todo o site
+ajustar formulario para enviar a imagem
+ajustar o servico de upload de imagem
 rota de edicao e criacao de posts com autenticação jwt
-front para consumir o cms (cadastrar e editar posts) usando autenticacao jwt (3 paginas - login, tabela com posts, pagina de cadastro/edicao)
 
 nome para o blog
 logo

@@ -13,7 +13,7 @@ export default function FeaturedPost(props: FeaturedPostProps) {
   const { id, slug } = props.postDetailed;
   return (
     <Wrapper href={`/posts/${id}/${slug}`}>
-      <BgImage bg={props.postDetailed.images[0].medium} />
+      <BgImage bg={'/laptop.jpeg'} />
       <Content>
         <Tags>
           {props.postDetailed.tags.split(',').map(tag => (

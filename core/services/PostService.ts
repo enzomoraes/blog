@@ -11,6 +11,15 @@ export default class PostService extends Service {
     );
   }
 
+  static insertNewPost(newPost: Post.PostCreate) {
+    return this.Http.post('/posts', newPost, {
+      headers: {
+        Authorization:
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZW56byIsInJvbGVzIjpbImNyZWF0ZTpwb3N0Il0sImlhdCI6MTY3NTI5NDkwNiwiZXhwIjoxNjc1MzgxMzA2fQ.Dxn1DaaaLOv5fCns1HCWBfa1HvbPzeJsMR9XOpS5yGk',
+      },
+    }).then(this.getData);
+  }
+
   static async getExistingPost(postId: string): Promise<Post.PostDetailed> {
     return {
       id: '1',
@@ -21,12 +30,12 @@ export default class PostService extends Service {
       images: [
         {
           id: '1',
-          medium: '/laptop.jpeg',
-          small: '/laptop.jpeg',
-          large: '/laptop.jpeg',
+          medium: '/laptop.jpeg' as any,
+          small: '/laptop.jpeg' as any,
+          large: '/laptop.jpeg' as any,
         },
       ],
-      createdAt: new Date().toDateString(),
+      createdAt: new Date().toDateString() as any,
     };
   }
 }

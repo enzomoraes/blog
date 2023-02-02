@@ -11,7 +11,7 @@ import { Post } from '../core/models/@types/Post';
 import PostService from '../core/services/PostService';
 
 interface HomeProps {
-  posts?: Post.PostPaginated;
+  posts: Post.PostPaginated;
 }
 
 export default function Home(props: HomeProps) {
@@ -25,7 +25,7 @@ export default function Home(props: HomeProps) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      {posts?.content[0] && (
+      {posts.content[0] && (
         <FeaturedPost postDetailed={posts.content[0]}></FeaturedPost>
       )}
       <PostsGrid>
@@ -36,7 +36,7 @@ export default function Home(props: HomeProps) {
 
       <ReactPaginate
         containerClassName={'Pagination'}
-        pageCount={posts?.totalRecords || 0}
+        pageCount={posts.totalRecords / posts.rows || 0}
         marginPagesDisplayed={0}
         pageRangeDisplayed={3}
         previousLabel={'<'}

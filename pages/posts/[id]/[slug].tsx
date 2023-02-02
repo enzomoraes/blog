@@ -18,7 +18,7 @@ export default function PostPage(props: PostProps) {
         <meta property='og:url' content='dnshere' />
         <meta property='og:description' content={post?.body.slice(0, 54)} />
         <meta property='og:type' content='article' />
-        <meta property='og:image' content={post?.images[0].medium} />
+        <meta property='og:image' content={'TODO ajustar'} />
         <title>{pageTitle}</title>
         <link
           rel='canonical'
@@ -27,8 +27,8 @@ export default function PostPage(props: PostProps) {
       </Head>
       {post && (
         <PostHeader
-          createdAt={post?.createdAt}
-          thumbnail={post?.images[0].large}
+          createdAt={new Date().toDateString()}
+          thumbnail={'/laptop.jpeg'}
           title={post?.title}
         ></PostHeader>
       )}

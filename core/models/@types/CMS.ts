@@ -5,45 +5,77 @@ export namespace CMS {
    */
 
   export interface paths {
-    '/images': {
+    '/auth/login': {
+      /** @description Login */
       post: {
+        /** @description Login */
+        requestBody: {
+          content: {
+            'application/json': {
+              username: string;
+              password: string;
+            };
+          };
+        };
         responses: {
-          /** @description Image uploaded */
+          /** @description Returns jwt token. */
+          200: {
+            content: {
+              'application/json': {
+                token: string;
+              };
+            };
+          };
+        };
+      };
+    };
+    '/images': {
+      /** @description Create a Image */
+      post: {
+        /** @description Create a Image */
+        requestBody: {
+          content: {
+            'multipart/form-data': {
+              image: Record<string, never>;
+            };
+          };
+        };
+        responses: {
+          /** @description Returns created image id. */
           200: {
             content: {
               'application/json': components['schemas']['ImageCreated'];
-              'application/xml': components['schemas']['ImageCreated'];
             };
           };
         };
       };
     };
     '/posts': {
+      /** @description Paginate Posts */
       get: {
+        /** @description Paginate Posts */
         responses: {
-          /** @description List of Posts */
+          /** @description Returns posts paginated. */
           200: {
             content: {
               'application/json': components['schemas']['PostPaginated'];
-              'application/xml': components['schemas']['PostPaginated'];
             };
           };
         };
       };
+      /** @description Create a Post */
       post: {
-        /** @description Creating new post */
+        /** @description Create a Post */
         requestBody: {
           content: {
             'application/json': components['schemas']['PostCreate'];
-            'application/xml': components['schemas']['PostCreate'];
           };
         };
         responses: {
-          /** @description New Post */
+          /** @description Returns created post. */
           200: {
             content: {
               'application/json': components['schemas']['Post'];
-              'application/xml': components['schemas']['Post'];
             };
           };
         };
@@ -55,21 +87,38 @@ export namespace CMS {
 
   export interface components {
     schemas: {
+      /** @description Post entity */
       Post: {
-        /** @example 1 */
+        /**
+         * @description Post id
+         * @example 15cbf48e-c7ed-4ec3-a65f-2a0f4759e9f1
+         */
         id: string;
-        /** @example título de um post */
+        /**
+         * @description Post title
+         * @example título de um post
+         */
         title: string;
-        /** @example titulo-de-um-post */
+        /**
+         * @description Post slug
+         * @example titulo-de-um-post
+         */
         slug: string;
-        /** @example javascript,html */
+        /**
+         * @description Post tags
+         * @example javascript,html
+         */
         tags: string;
-        /** @example ##Markup */
+        /**
+         * @description Post content body
+         * @example ##Markup
+         */
         body: string;
         images: components['schemas']['Image'][];
-        /** @example Mon Jan 30 2023 21:15:53 GMT-0400 (Amazon Standard Time) */
+        /** @description Post date */
         createdAt: string;
       };
+      /** @description Post paginated */
       PostPaginated: {
         content: components['schemas']['Post'][];
         /** @example 5 */
@@ -79,55 +128,57 @@ export namespace CMS {
         /** @example 10 */
         totalRecords: number;
       };
+      /** @description Post create DTO */
       PostCreate: {
-        /** @example título de um post */
-        title: string;
-        /** @example titulo-de-um-post */
-        slug: string;
-        /** @example javascript,html */
-        tags: string;
-        /** @example ##Markup */
-        body: string;
         /**
-         * @example [
-         *   "1",
-         *   "2"
-         * ]
+         * @description Post title
+         * @example título de um post
          */
+        title: string;
+        /**
+         * @description Post tags
+         * @example javascript,html
+         */
+        tags: string;
+        /**
+         * @description Post content body
+         * @example ##Markup
+         */
+        body: string;
         imagesIds: string[];
       };
+      /** @description Image entity */
       Image: {
-        /** @example 1 */
+        /**
+         * @description Image id
+         * @example 15cbf48e-c7ed-4ec3-a65f-2a0f4759e9f1
+         */
         id: string;
-        /** @example base64 */
-        small: string;
-        /** @example base64 */
-        medium: string;
-        /** @example base64 */
-        large: string;
+        /** @description Image small */
+        small: Record<string, never>;
+        /** @description Image medium */
+        medium: Record<string, never>;
+        /** @description Image large */
+        large: Record<string, never>;
       };
+      /** @description Image created succesfuly */
       ImageCreated: {
+        /**
+         * @description Image id
+         * @example 15cbf48e-c7ed-4ec3-a65f-2a0f4759e9f1
+         */
+        id: string;
         /** @example image created succesfully */
         message: string;
-        /** @example 1 */
-        id: string;
-      };
-      PaginateQuery: {
-        rows: components['parameters']['rows'];
-        page: components['parameters']['page'];
-        order: components['parameters']['order'];
       };
     };
     responses: never;
     parameters: {
-      /** @description rows to be returned in one page */
+      /** @description number of rows to be returned */
       rows: number;
-      /** @description page index of pagination */
+      /** @description number of pages to be returned */
       page: number;
-      /**
-       * @description order of pagination [ field,order ]
-       * @example title,asc
-       */
+      /** @description ordering to be returned [ field,order ] */
       order: string;
     };
     requestBodies: never;
