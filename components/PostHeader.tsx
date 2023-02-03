@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image, { ImageLoader } from 'next/image';
 import { transparentize } from 'polished';
 import styled from 'styled-components';
 import formatPostDate from '../core/utils/formatPostDate';
@@ -10,19 +10,24 @@ interface PostHeaderProps {
 }
 
 export default function PostHeader(props: PostHeaderProps) {
+  const loader = ({ src }: any) => {
+    return `http://localhost:3000/images/${src}`;
+  };
+
   const { thumbnail, createdAt, title } = props;
   return (
     <Wrapper>
       <Thumbnail>
-        <Image src={thumbnail} width={848} height={256} alt={title} />
+        <Image
+          src={thumbnail}
+          loader={loader}
+          width={848}
+          height={256}
+          alt={title}
+        />
       </Thumbnail>
       <Editor>
-        <Image
-          src={'/enzo.jpeg'}
-          width={64}
-          height={64}
-          alt={'Enzo'}
-        />
+        <Image src={'/enzo.jpeg'} width={64} height={64} alt={'Enzo'} />
       </Editor>
       <PublishDate>{formatPostDate(createdAt)}</PublishDate>
       <Title>{title}</Title>

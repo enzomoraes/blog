@@ -1,10 +1,10 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { ParsedUrlQuery } from 'querystring';
-import Markdown from '../../../components/Markdown';
-import PostHeader from '../../../components/PostHeader';
-import { Post } from '../../../core/models/@types/Post';
-import PostService from '../../../core/services/PostService';
+import Markdown from '../../components/Markdown';
+import PostHeader from '../../components/PostHeader';
+import { Post } from '../../core/models/@types/Post';
+import PostService from '../../core/services/PostService';
 
 export default function PostPage(props: PostProps) {
   const { post } = props;
@@ -18,7 +18,7 @@ export default function PostPage(props: PostProps) {
         <meta property='og:url' content='dnshere' />
         <meta property='og:description' content={post?.body.slice(0, 54)} />
         <meta property='og:type' content='article' />
-        <meta property='og:image' content={'TODO ajustar'} />
+        <meta property='og:image' content={post?.images[0].medium} />
         <title>{pageTitle}</title>
         <link
           rel='canonical'
@@ -28,7 +28,7 @@ export default function PostPage(props: PostProps) {
       {post && (
         <PostHeader
           createdAt={new Date().toDateString()}
-          thumbnail={'/laptop.jpeg'}
+          thumbnail={post.images[0].large}
           title={post?.title}
         ></PostHeader>
       )}
@@ -50,16 +50,16 @@ interface Params extends ParsedUrlQuery {
 export const getServerSideProps: GetServerSideProps<
   PostProps,
   Params
-> = async ({ params, req }) => {
+> = async ({ params }) => {
   try {
     if (!params) return { notFound: true };
 
-    const { id } = params;
+    const { slug } = params;
 
-    const post = await PostService.getExistingPost(id);
-
+    const post = await PostService.getExistingPostBySlug(slug);
+    
     return {
-      props: { post, host: req.headers.host },
+      props: { post },
     };
   } catch (error: any) {
     return {

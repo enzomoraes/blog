@@ -10,10 +10,10 @@ interface FeaturedPostProps {
 }
 
 export default function FeaturedPost(props: FeaturedPostProps) {
-  const { id, slug } = props.postDetailed;
+  const { slug, images } = props.postDetailed;
   return (
-    <Wrapper href={`/posts/${id}/${slug}`}>
-      <BgImage bg={'/laptop.jpeg'} />
+    <Wrapper href={`/posts/${slug}`}>
+      <BgImage bg={`http://localhost:3000/images/${images[0].large}`} />
       <Content>
         <Tags>
           {props.postDetailed.tags.split(',').map(tag => (

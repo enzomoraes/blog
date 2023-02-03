@@ -20,22 +20,7 @@ export default class PostService extends Service {
     }).then(this.getData);
   }
 
-  static async getExistingPost(postId: string): Promise<Post.PostDetailed> {
-    return {
-      id: '1',
-      title: 'Como aprender CSS e Javascript',
-      slug: 'string',
-      tags: 'javascript,css',
-      body: 'texto em markdown aqui',
-      images: [
-        {
-          id: '1',
-          medium: '/laptop.jpeg' as any,
-          small: '/laptop.jpeg' as any,
-          large: '/laptop.jpeg' as any,
-        },
-      ],
-      createdAt: new Date().toDateString() as any,
-    };
+  static async getExistingPostBySlug(slug: string): Promise<Post.PostDetailed> {
+    return this.Http.get(`/posts/${slug}`).then(this.getData);
   }
 }

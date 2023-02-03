@@ -10,9 +10,10 @@ interface PostCardProps {
 }
 export default function PostCard(props: PostCardProps) {
   const { post } = props;
+  const imageUrl = `http://localhost:3000/images/${post.images[0]?.medium}`;
   return (
-    <Wrapper href={`/posts/${post.id}/${post.slug}`}>
-      <Thumbnail bg={'/laptop.jpeg'} />
+    <Wrapper href={`/posts/${post.slug}`}>
+      <Thumbnail bg={imageUrl} />
       <Info>
         <Editor>
           <EditorImage

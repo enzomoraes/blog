@@ -17,7 +17,6 @@ interface HomeProps {
 export default function Home(props: HomeProps) {
   const { posts } = props;
   if (posts?.totalRecords === 0) return <Launching></Launching>;
-
   return (
     <PageGrid>
       <Head>

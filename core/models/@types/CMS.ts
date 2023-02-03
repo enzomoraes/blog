@@ -50,6 +50,26 @@ export namespace CMS {
         };
       };
     };
+    '/images/{path}': {
+      /** @description Serves a Image */
+      get: {
+        /** @description Serves a Image */
+        parameters: {
+          /** @description image path */
+          path: {
+            path: string;
+          };
+        };
+        responses: {
+          /** @description Returns the image file. */
+          200: {
+            content: {
+              'image/png': string;
+            };
+          };
+        };
+      };
+    };
     '/posts': {
       /** @description Paginate Posts */
       get: {
@@ -155,11 +175,11 @@ export namespace CMS {
          */
         id: string;
         /** @description Image small */
-        small: Record<string, never>;
+        small: string;
         /** @description Image medium */
-        medium: Record<string, never>;
+        medium: string;
         /** @description Image large */
-        large: Record<string, never>;
+        large: string;
       };
       /** @description Image created succesfuly */
       ImageCreated: {

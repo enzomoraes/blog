@@ -73,7 +73,7 @@ export default function PostForm(props: PostFormProps) {
   }
 
   function fetchPost(postId: string) {
-    PostService.getExistingPost(postId).then(post => {
+    PostService.getExistingPostBySlug(postId).then(post => {
       setTitle(post.title);
       // setImagesIds(post.images);
       setBody(post.body);
