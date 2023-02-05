@@ -11,7 +11,7 @@ interface PostHeaderProps {
 
 export default function PostHeader(props: PostHeaderProps) {
   const loader = ({ src }: any) => {
-    return `http://localhost:3000/images/${src}`;
+    return `${process.env.NEXT_PUBLIC_API_HOST}/images/${src}`;
   };
 
   const { thumbnail, createdAt, title } = props;

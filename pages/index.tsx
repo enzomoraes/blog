@@ -68,7 +68,7 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async ({
   }
 
   const posts = await PostService.paginate({
-    page: 0,
+    page: page - 1,
     rows: 10,
     order: 'createdAt,desc',
   });

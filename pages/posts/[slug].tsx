@@ -15,14 +15,14 @@ export default function PostPage(props: PostProps) {
         {/* Open graph - pre visualizacao do site */}
         <meta property='og:title' content={post?.title} />
         <meta property='og:site_name' content='emper' />
-        <meta property='og:url' content='dnshere' />
+        <meta property='og:url' content={process.env.NEXT_PUBLIC_FRONT_HOST} />
         <meta property='og:description' content={post?.body.slice(0, 54)} />
         <meta property='og:type' content='article' />
         <meta property='og:image' content={post?.images[0].medium} />
         <title>{pageTitle}</title>
         <link
           rel='canonical'
-          href={`http://localhost:3000/posts/${post?.id}/${post?.slug}`}
+          href={`${process.env.NEXT_PUBLIC_API_HOST}/posts/${post?.id}/${post?.slug}`}
         />
       </Head>
       {post && (

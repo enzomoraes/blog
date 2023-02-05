@@ -13,7 +13,7 @@ export default function FeaturedPost(props: FeaturedPostProps) {
   const { slug, images } = props.postDetailed;
   return (
     <Wrapper href={`/posts/${slug}`}>
-      <BgImage bg={`http://localhost:3000/images/${images[0].large}`} />
+      <BgImage bg={`${process.env.NEXT_PUBLIC_API_HOST}/images/${images[0].large}`} />
       <Content>
         <Tags>
           {props.postDetailed.tags.split(',').map(tag => (
@@ -49,9 +49,8 @@ const BgImage = styled.div<{ bg: string }>`
   object-fit: cover;
   position: absolute;
   inset: 0;
-  background-color: blue;
   z-index: 0;
-  opacity: 0.05;
+  opacity: 0.1;
 `;
 
 const Wrapper = styled(Link)`

@@ -4,7 +4,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['storage.googleapis.com', 'localhost'],
+    domains: ['localhost'],
   },
 };
 

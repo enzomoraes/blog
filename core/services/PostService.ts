@@ -13,10 +13,7 @@ export default class PostService extends Service {
 
   static insertNewPost(newPost: Post.PostCreate) {
     return this.Http.post('/posts', newPost, {
-      headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZW56byIsInJvbGVzIjpbImNyZWF0ZTpwb3N0Il0sImlhdCI6MTY3NTI5NDkwNiwiZXhwIjoxNjc1MzgxMzA2fQ.Dxn1DaaaLOv5fCns1HCWBfa1HvbPzeJsMR9XOpS5yGk',
-      },
+      withCredentials: true,
     }).then(this.getData);
   }
 
